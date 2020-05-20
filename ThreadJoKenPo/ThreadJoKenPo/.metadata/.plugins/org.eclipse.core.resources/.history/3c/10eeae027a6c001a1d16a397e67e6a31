@@ -1,0 +1,78 @@
+package controller;
+
+import java.util.concurrent.Semaphore;
+
+public class ThreadJoKenPo extends Thread {
+	private String jogador;
+	private String time;
+	private int j1;
+	private int j2;
+	private static int jogo;
+	private Semaphore semaforo;
+
+	public ThreadJoKenPo(String jogador, Semaphore semaforo) {
+		this.jogador = jogador;
+		this.time = time;
+		this.j1 = j1;
+		this.j2 = j2;
+		this.semaforo = semaforo;
+	}
+
+	private void Duelo() {
+		int vitoria = 0;
+
+		while (vitoria <= 3) {
+
+			try {
+				sleep(50);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			j1 = (int) ((Math.random() * 3) + 1);
+			j2 = (int) ((Math.random() * 3) + 1);
+			jogo = (int) ((Math.random() * 3) + 1);
+			
+			if(j1 > j2) {
+				vitoria++;
+			}
+
+			switch (jogo) {
+			case 1:
+				System.out.println("Tesoura vence Papel" + jogador);
+				break;
+			case 2:
+				System.out.println("Papel vence Pedra" + jogador);
+				break;
+			case 3:
+				System.out.println("Pedra vence Tesoura" + jogador);
+				break;
+
+			default:
+
+				System.out.println("empate");
+				break;
+			}
+			try {
+				semaforo.acquire();
+				mostraVencedores();
+			} catch (InterruptedException e) {
+
+				e.printStackTrace();
+			} finally {
+				semaforo.release();
+			}
+		}
+	}
+
+	private void mostraVencedores() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void run() {
+		Duelo();
+	}
+}

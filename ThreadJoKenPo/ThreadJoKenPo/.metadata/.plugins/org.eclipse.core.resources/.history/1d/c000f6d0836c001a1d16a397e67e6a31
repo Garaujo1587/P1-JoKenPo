@@ -1,0 +1,31 @@
+package controller;
+
+public class Jogador {
+	private String jogador;
+	private String time;
+	
+	public Jogador(String jogador, String time) {
+		
+		this.jogador = jogador;
+		this.time = time;
+	}
+
+	public String getJogador() {
+		return jogador;
+	}
+
+	public void setJogador(String jogador) {
+		this.jogador = jogador;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	
+
+}
